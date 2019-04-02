@@ -10,16 +10,29 @@ class FlightSearch extends Component{
     super(props)
     this.state = {
       open: true,
-      
+      startDate: "",
+      endDate: "",
+      departures: [],
+      arrivals: []
     }
   }
 
-  getFlights=()=>{
-
+  getDepartures=(start, end)=>{
+    const {icao} = this.props.airport
+    axios.get(`https://opensky-network.org/api/flights/departure?airport=${icao}&begin=${start}&end=${end}`).then((res)=>{
+      this.setState({departures:res.data})
+    })
   }
 
   hideDialog = ()=>{
     this.setState({open:false})
+  }
+
+  dateSet= async (e)=>{
+    const date = new Date(e.target.value)
+    console.log(date)
+    // this.setState({[e.target.name]: Date.parse(date.toUTCString())})
+    // console.log(this.state)
   }
 
   render(){
@@ -31,13 +44,17 @@ class FlightSearch extends Component{
 
           <DialogContent>
             <TextField
-            label = "departing Flights"
-            type = "number"
+            label = "start date"
+            type = "date"
+            name = "startDate"
+            onChange = {(e)=>this.dateSet(e)}
             />
 
           <TextField
-            label = "arriving Flights"
-            type = "number"
+            label = "end date"
+            type = "date"
+            name = "endDate"
+            onChange = {(e)=>this.dateSet(e)}
             />
           </DialogContent>
 
