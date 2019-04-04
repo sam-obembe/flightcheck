@@ -64,4 +64,10 @@ export default Dashboard
 /*
 On the dashboard I'm rendering a card for each airport using the showAirports function which maps over the airports array in state, which I set to contain values I'm importing from airports.js
 
+showAirports() is a function that maps over the list of airports in state and renders an AirportCard component, passing in all the details of the airport through props 
+
+showFlightSearch() is a function that renders the FlightSearch based on the value of "search" in  state. If search:true, FlightSearch renders, if search:false, it will not render
+
+
+searchToggle() toggles the value of "search" in state. This function is passed to the AirportCard component where it is called when the "See More" button is clicked
 */

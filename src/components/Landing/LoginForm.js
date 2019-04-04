@@ -56,7 +56,7 @@ class LoginForm extends Component{
           <div style = {loginStyle}>
             <Typography variant = "h5">Hello</Typography>
             <Input placeholder = "username" name = "username" onChange = {(e)=>this.inputHandle(e)}/>
-            <Input  placeholder = "password" name = "password" onChange = {(e)=>this.inputHandle(e)}/>
+            <Input  placeholder = "password" name = "password" onChange = {(e)=>this.inputHandle(e)} type = "password"/>
             <Button onClick = {()=>this.submit()}>Submit</Button>
           </div>
         </Paper>

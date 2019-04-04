@@ -38,3 +38,7 @@ const AirportCard = (props)=>{
   )
 }
 export default AirportCard
+
+/*
+This component implements the Card component from material UI. It accepts airport details passed through props from the dashboard. When see more is, the state in Dashboard is updated, setting "selected" in Dashboard state to the and the FlightSearch dialog is shown
+*/

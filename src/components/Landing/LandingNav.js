@@ -6,7 +6,7 @@ const LandingNav = ()=>{
   return(
     <div style = {{marginBottom: "100px"}}>
       <AppBar>
-        <Typography variant = "h4">Hello I am the landing Nav</Typography>
+        <Typography variant = "h4">Flight Search</Typography>
       </AppBar>
     </div>
   
