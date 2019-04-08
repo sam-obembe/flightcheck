@@ -13,12 +13,12 @@ const AirportCard = (props)=>{
     width: "250px",
     margin: "10px",
   }
-  const {city,country,name} = props.airport
+  const {city,country,name,img} = props.airport
   return(
     <div style = {cardStyle}>
       <Card>
         <CardActionArea>
-          <img src = "https://amadeus.com/content/dam/amadeus/images/en/air-transportation/aircrafts/jet-bridge-gateway-airplane-airport.jpg.transform/medium/img.jpg" alt = "airport"/>
+          <img src = {img} alt = "airport" style = {{height: "250px"}}/>
         </CardActionArea>
     
    

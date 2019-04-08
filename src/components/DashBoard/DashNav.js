@@ -1,13 +1,26 @@
 import React from 'react'
 import AppBar from '@material-ui/core/AppBar'
+import Button from '@material-ui/core/Button'
+import {Link} from 'react-router-dom'
 // import Typography from '@material-ui/core/Typography'
 
 const DashNav = ()=>{
+  const divStyle = {
+    display: "flex",
+    flexDirection : "row",
+    height: "50px",
+    justifyContent: "space-between"
+  }
   return(
     <div style = {{marginBottom: "100px"}}>
      
       <AppBar>
-        <img src = {require("../../paper-plane.png")} alt = "logo" width = "50px"/>
+        
+        <div style = {divStyle}>
+          <img src = {require("../../paper-plane.png")} alt = "logo" width = "50px"/>
+          <Link to = "/"><Button>Logout</Button></Link>
+        </div>
+        
       </AppBar>
  
     </div>

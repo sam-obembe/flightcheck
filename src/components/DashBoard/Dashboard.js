@@ -22,6 +22,7 @@ class Dashboard extends Component{
 
   showFlightSearch =()=>{
     if(this.state.search===true){
+      //selected airport details are passed to FlightSearch component
       return <FlightSearch searchTogg = {this.searchToggle} airport = {this.state.selected}/>
     }
   }
@@ -29,7 +30,7 @@ class Dashboard extends Component{
   searchToggle=(airport)=>{
     if(this.state.search===false){
       this.setState({search:true})
-      this.setState({selected: airport})
+      this.setState({selected: airport}) //recieved from the AirportCard component
     }else{
       this.setState({search:false})
       this.setState({selected:""})
@@ -38,7 +39,7 @@ class Dashboard extends Component{
 
 
   render(){
-    console.log(this.state)
+    // console.log(this.state)
     const gridStyle = {
       display: "flex",
       justifyContent: "space-around",
@@ -52,8 +53,6 @@ class Dashboard extends Component{
         <div style= {gridStyle}>
           {this.showAirports()}
         </div>
-        
-        <h1>Hello</h1>
       </div>
     )
   }

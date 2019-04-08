@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button'
 import { DialogContent, DialogActions, DialogTitle } from '@material-ui/core';
 import TextField from '@material-ui/core/TextField'
 import InputLabel from '@material-ui/core/InputLabel'
+import FlightList from './FlightList'
 
 class FlightSearch extends Component{
   constructor(props){
@@ -14,15 +15,18 @@ class FlightSearch extends Component{
       startDate: "",
       endDate: "",
       departures: [],
-      arrivals: []
+      arrivals: [],
+      flightsToShow: ""
     }
   }
 
   getFlights=async(start, end,flightType)=>{
+    //passing in the flightType as an argument so I don't have to write two different functions
     const {icao} = this.props.airport
-    await axios.get(`https://opensky-network.org/api/flights/${flightType}?airport=${icao}&begin=${start}&end=${end}`).then((res)=>{
+    await axios.get(`https://opensky-network.org/api/flights/${flightType}?airport=${icao}&begin=${start}&end=${end}`).then(async(res)=>{
       // console.log(res.data)
-      this.setState({[flightType]:res.data})
+      await this.setState({[`${flightType}s`]:res.data})
+      await this.setState({flightsToShow:flightType})
     })
   }
 
@@ -36,13 +40,23 @@ class FlightSearch extends Component{
     // console.log(this.state)
   }
 
+  flightListShow = ()=>{
+    if(this.state.flightsToShow==="departure" && this.state.departures.length>0){
+      return <FlightList flights = {this.state.departures}/>
+    }else if(this.state.flightsToShow === "arrival" && this.state.arrivals.length>0){
+      return <FlightList flights = {this.state.arrivals}/>
+    }else{
+      return <h1>Search for flights</h1>
+    }
+  }
+
   render(){
-    const {name,city,country,icao} = this.props.airport
-    console.log(name, city, country, icao)
+    const {name /*city,country,icao*/} = this.props.airport
+    // console.log(name, city, country, icao)
     const {startDate, endDate} = this.state
     return(
       <div>
-        <Dialog open = {this.state.open}>
+        <Dialog open = {this.state.open} fullWidth = {true} scroll = "body">
           <DialogTitle>Flights to and from {name}</DialogTitle>
 
           <DialogContent>
@@ -60,6 +74,9 @@ class FlightSearch extends Component{
               name = "endDate"
               onChange = {(e)=>this.dateSet(e)}
               />
+            <div>
+              {this.flightListShow()}
+            </div>
           </DialogContent>
 
           <DialogActions>
